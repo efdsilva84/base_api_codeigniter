@@ -55,5 +55,11 @@ $route['translate_uri_dashes'] = FALSE;
 
 // $route['api/demo'] = 'api/ApiDemoController/index';
 $route['api/user'] = 'api/UserController/index';
+$route['api/user/cad_user'] = 'api/UserController/cad_user';
+$route['api/user/edit/(:any)'] = 'api/UserController/find_user/$1';
+$route['api/user/login'] = 'api/UserController/login';
+
+
+
 
 

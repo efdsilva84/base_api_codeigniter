@@ -22,4 +22,74 @@ class UserController extends RestController{
 
     }
 
+ 
+    public function login_post(){
+        $user = new UserModel;
+
+        $user_cpf = $this->post('cpf');
+        $user_senha = $this->post('senha');
+
+ 
+
+        $result = $user->login_user($user_cpf, $user_senha);
+        // $this->response($data, 201);
+        if(!empty($result)){
+
+            $this->response([
+                'status' => true,
+                'message'=> 'Longin realizado com sucesso!',
+                'user' => $result // Pode retornar os dados do usuário, sem a senha
+
+            ], RestController::HTTP_OK);
+            return $result;
+        }else{
+
+            $this->response([
+                'status' => false,
+                'message'=> 'CPF/Senha inválidos!'
+            ], RestController::HTTP_BAD_REQUEST);
+            
+
+        }
+    }
+ 
+    public function cad_user_post(){
+        $user = new UserModel;
+
+        $data = [
+            'nome' => $this->post('nome'),
+            'email' => $this->post('email'),
+            'assunto' => $this->post('assunto'),
+            'msg' => $this->post('mensagem'),
+
+
+        ];
+        $result = $user->insertUser($data);
+        // $this->response($data, 201);
+        if($result > 0){
+
+            $this->response([
+                'status' => true,
+                'message'=> 'Criado com sucesso !'
+            ], RestController::HTTP_OK);
+        }else{
+
+            $this->response([
+                'status' => false,
+                'message'=> 'Falha !'
+            ], RestController::HTTP_BAD_REQUEST);
+            
+
+        }
+    }
+
+
+    public function find_user_get($id){
+        $user = new UserModel;
+        $result =$user->userEdit($id);
+
+    }
+
+
+    
 }
