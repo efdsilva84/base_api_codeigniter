@@ -61,9 +61,8 @@ class UserController extends RestController{
             'email' => $this->post('email'),
             'assunto' => $this->post('assunto'),
             'msg' => $this->post('mensagem'),
-
-
         ];
+
         $result = $user->insertUser($data);
         // $this->response($data, 201);
         if($result > 0){
@@ -84,11 +83,7 @@ class UserController extends RestController{
     }
 
 
-    public function find_user_get($id){
-        $user = new UserModel;
-        $result =$user->userEdit($id);
 
-    }
 
 
     

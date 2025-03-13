@@ -59,6 +59,11 @@ $route['api/user/cad_user'] = 'api/UserController/cad_user';
 $route['api/user/edit/(:any)'] = 'api/UserController/find_user/$1';
 $route['api/user/login'] = 'api/UserController/login';
 
+$route['api/starbucks'] = 'api/StarbucksController/index';
+$route['api/starbucks/atualiza_star/(:any)'] = 'api/StarbucksController/atualiza_star/$1';
+
+
+
 
 
 
