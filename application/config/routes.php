@@ -61,6 +61,10 @@ $route['api/user/login'] = 'api/UserController/login';
 
 $route['api/starbucks'] = 'api/StarbucksController/index';
 $route['api/starbucks/atualiza_star/(:any)'] = 'api/StarbucksController/atualiza_star/$1';
+$route['api/eburger'] = 'api/EburgerController/index';
+$route['api/eburger/create_burger'] = 'api/EburgerController/create_burger';
+
+
 
 
 
