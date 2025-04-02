@@ -19,8 +19,14 @@ class EburgerController extends RestController
 
     public function index_get(){
         $eburger = new EburgerModel;
-
         $result_emp = $eburger->get_burgers();
+        $this->response($result_emp, 200);
+
+    }
+
+    public function eburger_txt_get(){
+        $eburger = new EburgerModel;
+        $result_emp = $eburger->get_burgers_textos();
         $this->response($result_emp, 200);
 
     }
@@ -58,35 +64,40 @@ class EburgerController extends RestController
             ], RestController::HTTP_OK);
         }
 
+    }
+
+    public function add_item_post(){
+        $eburger = new EburgerModel;
 
 
+        $data = [
+            'item_name' => $this->post('item_name'),
+ 
+        ];
 
+        $result = $eburger->new_item($data);
+        // $this->response($data, 201);
+        if($result > 0){
 
+            $this->response([
+                'status' => true,
+                'message'=> 'Novo Item menu adicionado !'
+            ], RestController::HTTP_OK);
+        }else{
 
+            $this->response([
+                'status' => false,
+                'message'=> 'Falha ao adicionar item !'
+            ], RestController::HTTP_BAD_REQUEST);
+            
 
-        // $new_name = time();
-        // $config = [
-        //     'upload_path' => './images/',
-        //     'allowed_types' => 'gif|jpg|png',
-        //     'file_name' => $new_name ,
-        // ];
-        // $this->load->library('upload', $config);
+        }
+    }
 
-
-
-
-
-
-
-
-        // $eburger_filename = $this->upload->data('img_name');
-
-
-        // var_dump("imagemmm", $image);
-        // $id = isset($data['id_msg']) ? $data['id_msg'] : null;
-
-
-
+    public function itens_mn_get(){
+        $eburger = new EburgerModel;
+        $result_emp = $eburger->all_itens_menu();
+        $this->response($result_emp, 200);
 
     }
 }

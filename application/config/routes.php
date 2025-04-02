@@ -62,7 +62,11 @@ $route['api/user/login'] = 'api/UserController/login';
 $route['api/starbucks'] = 'api/StarbucksController/index';
 $route['api/starbucks/atualiza_star/(:any)'] = 'api/StarbucksController/atualiza_star/$1';
 $route['api/eburger'] = 'api/EburgerController/index';
+$route['api/eburger/eburger_txt'] = 'api/EburgerController/eburger_txt';
 $route['api/eburger/create_burger'] = 'api/EburgerController/create_burger';
+$route['api/eburger/add_item'] = 'api/EburgerController/add_item';
+$route['api/eburger/itens_mn'] = 'api/EburgerController/itens_mn';
+
 
 
 
