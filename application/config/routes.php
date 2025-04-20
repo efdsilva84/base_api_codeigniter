@@ -66,6 +66,10 @@ $route['api/eburger/eburger_txt'] = 'api/EburgerController/eburger_txt';
 $route['api/eburger/create_burger'] = 'api/EburgerController/create_burger';
 $route['api/eburger/add_item'] = 'api/EburgerController/add_item';
 $route['api/eburger/itens_mn'] = 'api/EburgerController/itens_mn';
+$route['api/eburger/search_burger/(:any)'] = 'api/EburgerController/search_burger/$1';
+
+$route['api/portifolio/msg_portifolio'] = 'api/PortifolioController/msg_portifolio';
+
 
 
 

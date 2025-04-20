@@ -24,6 +24,16 @@ class EburgerModel extends CI_Model{
         $query = $this->db->get('eburgers_item');
         return $query->result();
     }
+    public function select_burger_id($id){
+    
+        $this->db->select('*');
+        $this->db->from('eburgers_item');
+        $this->db->join('eburgers', 'eburgers.id_burger_item = eburgers_item.id_item');
+        $this->db->where('eburgers.id_burger_item', $id);
+        $query = $this->db->get();
+        return $query->result();  //ou ->result() se quiser vários resultados
+
+    }
 
 
 }

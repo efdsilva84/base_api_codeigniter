@@ -100,4 +100,11 @@ class EburgerController extends RestController
         $this->response($result_emp, 200);
 
     }
+
+    public function search_burger_get($id){
+        $eburger = new EburgerModel;
+        $result_emp = $eburger->select_burger_id($id);
+        $this->response($result_emp, 200);
+
+    }
 }
