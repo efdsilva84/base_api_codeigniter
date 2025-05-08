@@ -8,8 +8,7 @@ use chriskacerguis\RestServer\RestController;
 
 require APPPATH . 'libraries/RestController.php';
 
-class PortifolioController extends RestController
-{
+class PortifolioController extends RestController{
 
     public function __construct() {
         parent::__construct();

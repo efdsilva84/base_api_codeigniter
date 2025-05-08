@@ -8,35 +8,69 @@ use chriskacerguis\RestServer\RestController;
 
 require APPPATH . 'libraries/RestController.php';
 
-class EburgerController extends RestController
-{
+class ThegazetteController extends RestController{
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        $this->load->model('EburgerModel');
+        $this->load->model('ThegazetteModel');
     }
 
     public function index_get(){
-        $eburger = new EburgerModel;
-        $result_emp = $eburger->get_burgers();
+        $policites = new ThegazetteModel;
+        $result_emp = $policites->politices_notice_get();
         $this->response($result_emp, 200);
 
     }
 
-    public function eburger_txt_get(){
-        $eburger = new EburgerModel;
-        $result_emp = $eburger->get_burgers_textos();
+    public function breaking_news_get(){
+        $breaking = new ThegazetteModel;
+        $result_emp = $breaking->breaking_new_get();
         $this->response($result_emp, 200);
 
     }
-    public function create_burger_post()
-{
-        $eburger = new EburgerModel;
+
+    public function login_post(){
+        $thegazette = new ThegazetteModel;
+        $email  = $this->post('email');
+        $senha  = $this->post('senha');
+ 
+
+        $result = $thegazette->log($email, $senha);
+
+        try {
+            $result = $thegazette->log($email, $senha);
+    
+            if ($result) {
+                $this->response([
+                    'status' => true,
+                    'message' => 'Login Realizado!',
+                    $result
+                ], RestController::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => false,
+                    'message' => 'Email ou senha incorretos!'
+                ], RestController::HTTP_UNAUTHORIZED); // HTTP 401 é mais apropriado
+            }
+        } catch (Exception $e) {
+            $this->response([
+                'status' => false,
+                'message' => 'Erro interno no servidor!'
+            ], RestController::HTTP_INTERNAL_ERROR);
+        }
+
+
+    }
+
+    public function new_notice_politices_post(){
+        $thegazette = new ThegazetteModel;
         $this->load->helper('file'); // Carrega o helper para manipulação de arquivos
         $extensao = 'jpg';
         $data = json_decode(file_get_contents("php://input"), true);
         $imagem_base64 = isset($data['imagem']) ? $data['imagem'] : null;
+        $id_notice = isset($data['id_notice']) ? $data['id_notice'] : null;
+
+
 
         // Decodifica a imagem
         $imagem_decodificada = base64_decode($imagem_base64);
@@ -54,8 +88,8 @@ class EburgerController extends RestController
             ], RestController::HTTP_BAD_REQUEST);
         } else {
             // echo json_encode(['status' => 'sucesso', 'mensagem' => 'Imagem salva com sucesso', 'caminho' => base_url('application/imagens/' . $nome_arquivo)]);
-            $data['imagem'] = $nome_arquivo;
-            $eburger->novo_hamburguer($data);
+            $data['img_politices'] = $nome_arquivo;
+            $thegazette->update_notice_policites($id_notice, $data);
 
             $this->response([
                 'status' => true,
@@ -66,45 +100,7 @@ class EburgerController extends RestController
 
     }
 
-    public function add_item_post(){
-        $eburger = new EburgerModel;
 
 
-        $data = [
-            'item_name' => $this->post('item_name'),
- 
-        ];
 
-        $result = $eburger->new_item($data);
-        // $this->response($data, 201);
-        if($result > 0){
-
-            $this->response([
-                'status' => true,
-                'message'=> 'Novo Item menu adicionado !'
-            ], RestController::HTTP_OK);
-        }else{
-
-            $this->response([
-                'status' => false,
-                'message'=> 'Falha ao adicionar item !'
-            ], RestController::HTTP_BAD_REQUEST);
-            
-
-        }
-    }
-
-    public function itens_mn_get(){
-        $eburger = new EburgerModel;
-        $result_emp = $eburger->all_itens_menu();
-        $this->response($result_emp, 200);
-
-    }
-
-    public function search_burger_get($id){
-        $eburger = new EburgerModel;
-        $result_emp = $eburger->select_burger_id($id);
-        $this->response($result_emp, 200);
-
-    }
 }
