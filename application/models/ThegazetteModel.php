@@ -5,6 +5,8 @@ class ThegazetteModel extends CI_Model{
 
 
     public function politices_notice_get(){
+         $today = date('Y-m-d'); // Formato compatível com DATE no MySQL
+        $this->db->where('data_notice', $today);
         $query = $this->db->get('thegazette');
         return $query->result();
     }
@@ -32,9 +34,13 @@ class ThegazetteModel extends CI_Model{
                 }
     }
 
-    public function update_notice_policites($id, $data) {
-        $this->db->where('id_notice', $id);
-        return $this->db->update('thegazette', $data);
+    public function nova_notice_policites($data) {
+        return $this->db->insert('thegazette', $data);
     }
+
+ 
+    
+
+    
 
 }

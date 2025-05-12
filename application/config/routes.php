@@ -73,7 +73,10 @@ $route['api/portifolio/msg_portifolio'] = 'api/PortifolioController/msg_portifol
 $route['api/thegazette'] = 'api/ThegazetteController/index';
 $route['api/thegazette/breaking_news'] = 'api/ThegazetteController/breaking_news';
 $route['api/thegazette/login'] = 'api/ThegazetteController/login';
-$route['api/thegazette/new_notice_politices/(:any)'] = 'api/ThegazetteController/new_notice_politices/$1';
+// $route['api/thegazette/new_notice_politices/(:any)'] = 'api/ThegazetteController/new_notice_politices/$1';
+$route['api/thegazette/login'] = 'api/ThegazetteController/login';
+$route['api/thegazette/new_notice_politices'] = 'api/ThegazetteController/new_notice_politices';
+
 
 
 

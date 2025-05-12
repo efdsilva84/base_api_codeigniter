@@ -22,6 +22,7 @@ class ThegazetteController extends RestController{
 
     }
 
+
     public function breaking_news_get(){
         $breaking = new ThegazetteModel;
         $result_emp = $breaking->breaking_new_get();
@@ -87,9 +88,16 @@ class ThegazetteController extends RestController{
                 'message' => 'Falha  a atualizar!'
             ], RestController::HTTP_BAD_REQUEST);
         } else {
+            $today = date('Y-m-d'); // Formato compatível com DATE no MySQL
+
             // echo json_encode(['status' => 'sucesso', 'mensagem' => 'Imagem salva com sucesso', 'caminho' => base_url('application/imagens/' . $nome_arquivo)]);
             $data['img_politices'] = $nome_arquivo;
-            $thegazette->update_notice_policites($id_notice, $data);
+            $data['imagem'] = $nome_arquivo;
+            $data['data_notice'] = $today;
+
+
+
+            $thegazette->nova_notice_policites($data);
 
             $this->response([
                 'status' => true,
