@@ -30,6 +30,12 @@ class EburgerController extends RestController
         $this->response($result_emp, 200);
 
     }
+        public function eburger_bebidas_get(){
+        $eburger = new EburgerModel;
+        $result_emp = $eburger->all_itens_bebidas();
+        $this->response($result_emp, 200);
+
+    }
     public function create_burger_post()
 {
         $eburger = new EburgerModel;

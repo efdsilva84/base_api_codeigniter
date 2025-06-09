@@ -17,7 +17,7 @@ class ThegazetteController extends RestController{
 
     public function index_get(){
         $policites = new ThegazetteModel;
-        $result_emp = $policites->politices_notice_get();
+        $result_emp = $policites->politices_notice();
         $this->response($result_emp, 200);
 
     }
@@ -71,8 +71,6 @@ class ThegazetteController extends RestController{
         $imagem_base64 = isset($data['imagem']) ? $data['imagem'] : null;
         $id_notice = isset($data['id_notice']) ? $data['id_notice'] : null;
 
-
-
         // Decodifica a imagem
         $imagem_decodificada = base64_decode($imagem_base64);
         // Configura o nome do arquivo
@@ -94,7 +92,7 @@ class ThegazetteController extends RestController{
             $data['img_politices'] = $nome_arquivo;
             $data['imagem'] = $nome_arquivo;
             $data['data_notice'] = $today;
-
+            $data['status_notice'] = '1';
 
 
             $thegazette->nova_notice_policites($data);

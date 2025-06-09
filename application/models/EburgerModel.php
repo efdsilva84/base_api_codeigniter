@@ -24,6 +24,10 @@ class EburgerModel extends CI_Model{
         $query = $this->db->get('eburgers_item');
         return $query->result();
     }
+    public function all_itens_bebidas(){
+        $query = $this->db->get('eburgers_bebidas');
+        return $query->result();
+    }
     public function select_burger_id($id){
     
         $this->db->select('*');

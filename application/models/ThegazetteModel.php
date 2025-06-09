@@ -4,9 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ThegazetteModel extends CI_Model{
 
 
-    public function politices_notice_get(){
-         $today = date('Y-m-d'); // Formato compatível com DATE no MySQL
-        $this->db->where('data_notice', $today);
+    public function politices_notice(){
+      //   $today = date('Y-m-d'); Formato compatível com DATE no MySQL
+       $this->db->where('data_notice', date('Y-m-d'));
+       $this->db->where('status_notice', '1');
+
         $query = $this->db->get('thegazette');
         return $query->result();
     }
